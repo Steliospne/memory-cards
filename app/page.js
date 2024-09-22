@@ -8,8 +8,8 @@ export default function Home() {
   const { settings, playClick } = useSettings();
   const handleLinkClick = () => playClick(settings.sound_effects);
   return (
-    <main>
-      <Image className='logo' width={750} alt='logo' src={logo} />
+    <main className='home'>
+      <Image className='logo' width={750} alt='logo' src={logo} priority />
       <div className='btn-wrapper'>
         <Link
           onClick={handleLinkClick}
