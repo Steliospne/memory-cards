@@ -1,16 +1,10 @@
-import Link from "next/link";
-
-function GameOver({ state, mode }) {
+function GameOver({ state, onClick }) {
   return (
     <div className='gameOverContainer'>
       {state === "lost" ? <p>Lost</p> : <p>Won</p>}
-      <Link
-        onClick={() => playClick(settings.sound_effects)}
-        className='restart btn'
-        href={`/game?mode=${mode}`}
-      >
+      <button onClick={onClick} className='btn'>
         Restart
-      </Link>
+      </button>
     </div>
   );
 }

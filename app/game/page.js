@@ -10,14 +10,15 @@ import { useEffect, useState } from "react";
 import GameOver from "../components/game-over";
 
 export default function Game({ searchParams }) {
+  const mode = searchParams.mode;
+
   const { settings, playClick } = useSettings();
   const [score, setScore] = useState(0);
-  const mode = searchParams.mode;
+  const [bestScore, setBestScore] = useState(0);
+  const [gameOver, setGameOver] = useState(false);
   const [selectedChampions, setSelectedChampions] = useState(
     getChampions(champions, mode)
   );
-
-  const [gameOver, setGameOver] = useState(false);
 
   const handleCardClick = (event) => {
     const name = event.target.parentElement.id
@@ -31,9 +32,9 @@ export default function Game({ searchParams }) {
       setScore(0);
       setGameOver(true);
     } else {
-      setScore((n) => n + 1);
+      setScore(score + 1);
     }
-
+    score >= bestScore && setBestScore(score);
     score === selectedChampions.length - 1 && setGameOver(true);
 
     setSelectedChampions((selectedChampions) =>
@@ -44,6 +45,18 @@ export default function Game({ searchParams }) {
 
     playClick(settings.sound_effects);
     shuffle(selectedChampions);
+  };
+
+  score > bestScore && setBestScore(bestScore + 1);
+
+  const handleGameOver = () => {
+    setGameOver(false);
+    setSelectedChampions((selectedChampions) =>
+      selectedChampions.map((champion) => ({
+        ...champion,
+        clicked: false,
+      }))
+    );
   };
 
   // ================ TODO ================
@@ -62,7 +75,12 @@ export default function Game({ searchParams }) {
     <main className={gameOver ? "game over" : "game"}>
       {!gameOver ? (
         <>
-          <h1 className='score'>{score}</h1>
+          <h1 className='score'>
+            {"score: "}
+            {score}
+            {" best score: "}
+            {bestScore}
+          </h1>
           <div className='gameBoard'>
             {selectedChampions.map((champion) => (
               <Card
@@ -76,7 +94,7 @@ export default function Game({ searchParams }) {
       ) : (
         <GameOver
           state={score === 0 ? "lost" : "won"}
-          mode={searchParams.mode}
+          onClick={handleGameOver}
         />
       )}
       <Link
