@@ -4,9 +4,9 @@ The **Memory Card** project is created according to the assignment from **The Od
 <br>
 <br>
 
-![Preview](#)
+![Preview](/public/snapshot.png)
 
-### 🔗 **Live preview** of the project [link](https://memory-cards-chi-snowy.vercel.app/).
+### 🔗 **Live** ----> [link](https://memory-cards-chi-snowy.vercel.app/).
 
 ## **Features**
 
@@ -16,6 +16,5 @@ The **Memory Card** project is created according to the assignment from **The Od
 ## **Outcome**
 
 - Used **React** with **NextJS**
-- Learned animations with Framer Motion
 - Learned conditional rendering
-- Learned importance of smaller components
+- Learned of react context
