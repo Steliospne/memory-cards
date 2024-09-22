@@ -3,6 +3,7 @@ import "./globals.css";
 import { Suspense } from "react";
 import { list } from "@vercel/blob";
 import Provider from "./components/provider";
+import { Analytics } from "@vercel/analytics/react";
 
 const frizQuadrata = localFont({
   src: "./fonts/Friz_Quadrata_Regular.ttf",
@@ -22,6 +23,7 @@ export default function RootLayout({ children }) {
         <Suspense fallback={<p>Loading...</p>}>
           <Video fileName='memory-cards-bg-d1NjGs1Y0KlaO1oHv2OTnLTkK3Suai.mp4' />
         </Suspense>
+        <Analytics />
       </body>
     </html>
   );
