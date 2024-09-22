@@ -51,6 +51,7 @@ export default function Game({ searchParams }) {
 
   const handleGameOver = () => {
     setGameOver(false);
+    setScore(0);
     setSelectedChampions((selectedChampions) =>
       selectedChampions.map((champion) => ({
         ...champion,
@@ -75,12 +76,10 @@ export default function Game({ searchParams }) {
     <main className={gameOver ? "game over" : "game"}>
       {!gameOver ? (
         <>
-          <h1 className='score'>
-            {"score: "}
-            {score}
-            {" best score: "}
-            {bestScore}
-          </h1>
+          <div className='score-board'>
+            <h1 className='score'>{`score: ${score}`}</h1>
+            <h1 className='best-score'>{`best score: ${bestScore}`}</h1>
+          </div>
           <div className='gameBoard'>
             {selectedChampions.map((champion) => (
               <Card
