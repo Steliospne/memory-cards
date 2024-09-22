@@ -34,7 +34,7 @@ async function Video({ fileName }) {
   });
   const { url } = blobs[0];
   return (
-    <video autoPlay loop muted>
+    <video autoPlay loop muted playsInline>
       <source src={url} type='video/mp4' />
     </video>
   );
