@@ -164,8 +164,8 @@ body {
   object-fit: cover;
   width: 75px;
   height: auto;
-  top: -6px;
-  left: 0px;
+  top: 0px;
+  left: -56px;
 }
 
 footer {
