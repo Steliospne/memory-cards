@@ -180,6 +180,10 @@ footer {
   justify-content: center;
 }
 
+.footer-btn-wrapper {
+  justify-content: space-evenly;
+}
+
 dialog {
   --dialog-width: 250px;
   --dialog-height: 200px;
@@ -217,11 +221,22 @@ dialog {
   display: flex;
   flex-direction: column;
   padding: 10px;
+  gap: 10px;
 }
 
 .settings > label {
   display: flex;
   gap: 10px;
+}
+
+.how-to {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.how-to > div {
+  margin: 10px;
 }
 
 .logo {
