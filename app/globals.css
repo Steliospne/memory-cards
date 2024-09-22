@@ -71,12 +71,16 @@ main {
   gap: 10px;
 }
 
+.btn,
 .btn-wrapper > a {
+  font-size: 1rem;
   padding: 10px;
   background-color: var(--blue-5);
   border: solid 3px var(--gold-4);
+  font-weight: bold;
 }
 
+.btn:hover,
 .back-btn:hover > img,
 .btn-wrapper > a:hover {
   transform: scale(1.1);
@@ -102,7 +106,59 @@ main {
 }
 
 footer {
+  width: 100%;
+  background-color: #010a1334;
   padding: 20px;
+}
+
+.footer-btn-wrapper,
+.dialog-btn-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+dialog {
+  --dialog-width: 250px;
+  --dialog-height: 200px;
+  width: var(--dialog-width);
+  height: var(--dialog-height);
+  background-color: var(--hextech-black);
+  position: absolute;
+  top: calc(50% - var(--dialog-height) / 2);
+  left: calc(50% - var(--dialog-width) / 2);
+}
+
+.dialog-btn-wrapper {
+  flex: 1;
+  align-items: center;
+}
+
+.dialog-btn-wrapper > .btn {
+  width: 45px;
+  height: 45px;
+  border-radius: 50rem;
+}
+
+.settings-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.settings-wrapper > h3 {
+  align-self: center;
+  padding: 10px;
+}
+
+.settings {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.settings > label {
+  display: flex;
+  gap: 10px;
 }
 
 .logo {
