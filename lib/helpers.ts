@@ -1,13 +1,5 @@
-import { GameState } from '@/hooks/use-game-state';
+import { GlobalState } from '@/hooks/use-global-state';
 import { Champion } from '@/types/models';
-
-// export const shuffle = <TData>(array: TData[]): TData[] => {
-//   for (let i = array.length - 1; i > 0; i--) {
-//     const swappingIndex = Math.floor(Math.random() * (i + 1));
-//     [array[i], array[swappingIndex]] = [array[swappingIndex], array[i]];
-//   }
-//   return array;
-// };
 
 export const shuffle = <TData>(array: TData[]): TData[] => {
   const arr = [...array]; // copy
@@ -20,7 +12,7 @@ export const shuffle = <TData>(array: TData[]): TData[] => {
 
 export const getChampions = (
   array: Champion[],
-  mode: GameState['state']['difficulty'] = 'easy'
+  mode: GlobalState['state']['difficulty'] = 'easy'
 ) => {
   const selectedChampions: Champion[] = [];
   let numberOfChampions = 5;
@@ -34,7 +26,7 @@ export const getChampions = (
       break;
     case 'hard':
       numberOfChampions = 10;
-      return array;
+      break;
     default:
       numberOfChampions = 5;
       break;

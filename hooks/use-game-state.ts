@@ -1,18 +1,17 @@
 import { Champion } from '@/types/models';
-import { useReducer } from 'react';
+import { useEffect, useReducer, useRef } from 'react';
+import { GlobalState } from './use-global-state';
 
 type State = {
+  flipped: boolean;
+  positions: number[];
   score: number;
-  gameStatus: 'ready' | 'started' | 'ended';
-  difficulty: 'easy' | 'medium' | 'hard' | '';
-  champions: Champion[];
 };
 
 const initialState: State = {
-  difficulty: '',
-  gameStatus: 'ready',
+  flipped: false,
+  positions: [],
   score: 0,
-  champions: [],
 };
 
 type SetterName<K extends string> = K extends `is${infer Rest}`
@@ -27,45 +26,62 @@ type Action = ActionsFromState<State>;
 
 function stateReducer(state: State, action: Action): State {
   switch (action.type) {
-    case 'setDifficulty':
-      return { ...state, difficulty: action.payload };
+    case 'setFlipped':
+      return { ...state, flipped: action.payload };
+    case 'setPositions':
+      return { ...state, positions: action.payload };
     case 'setScore':
       return { ...state, score: action.payload };
-    case 'setGameStatus':
-      return { ...state, gameStatus: action.payload };
-    case 'setChampions':
-      return { ...state, champions: action.payload };
   }
 }
 
 export type GameState = ReturnType<typeof useGameState>;
 
-export default function useGameState() {
+interface useGameStateProps {
+  globalState: GlobalState['state'];
+  globalHandler: GlobalState['handler'];
+}
+
+export default function useGameState({
+  globalState,
+  globalHandler,
+}: useGameStateProps) {
   const [state, dispatch] = useReducer(stateReducer, initialState);
+  const scoreRef = useRef(0);
+  const { champions } = globalState;
+  const { setGameStatus } = globalHandler;
 
-  function setScore(payload: State['score']) {
-    dispatch({ type: 'setScore', payload });
+  useEffect(() => {
+    setPositions(champions.map((_, i) => i));
+  }, [champions.length]);
+
+  useEffect(() => {
+    if (scoreRef.current === champions.length) {
+      setGameStatus('won');
+    }
+  }, [state.score]);
+
+  function setFlipped(payload: State['flipped']) {
+    dispatch({ type: 'setFlipped', payload });
   }
 
-  function setGameStatus(payload: State['gameStatus']) {
-    dispatch({ type: 'setGameStatus', payload });
+  function setPositions(payload: State['positions']) {
+    dispatch({ type: 'setPositions', payload });
   }
 
-  function setDifficulty(payload: State['difficulty']) {
-    dispatch({ type: 'setDifficulty', payload });
-  }
-
-  function setChampions(payload: State['champions']) {
-    dispatch({ type: 'setChampions', payload });
+  function setScore() {
+    const newScore = state.score + 1;
+    scoreRef.current = newScore;
+    dispatch({ type: 'setScore', payload: newScore });
   }
 
   return {
     state,
+    scoreRef,
     handler: {
+      setFlipped,
+      setPositions,
       setScore,
-      setGameStatus,
-      setDifficulty,
-      setChampions,
     },
   };
 }

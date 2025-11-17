@@ -1,6 +1,6 @@
 'use client';
 
-import useGameState, { GameState } from '@/hooks/use-game-state';
+import useGlobalState, { GlobalState } from '@/hooks/use-global-state';
 import { createContext, ReactNode, useContext } from 'react';
 
 interface GlobalDataProviderProps {
@@ -8,16 +8,16 @@ interface GlobalDataProviderProps {
 }
 
 interface GlobalDataContextValue {
-  gameState: GameState;
+  globalState: GlobalState;
 }
 
 const GlobalDataContext = createContext<GlobalDataContextValue | null>(null);
 
 export const GlobalDataProvider = ({ children }: GlobalDataProviderProps) => {
-  const gameState = useGameState();
+  const globalState = useGlobalState();
 
   return (
-    <GlobalDataContext.Provider value={{ gameState }}>
+    <GlobalDataContext.Provider value={{ globalState }}>
       {children}
     </GlobalDataContext.Provider>
   );
