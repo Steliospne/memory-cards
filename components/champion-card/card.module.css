@@ -1,0 +1,24 @@
+.card_container {
+  perspective: 1000px;
+}
+
+.card {
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.6s;
+  cursor: pointer;
+}
+
+.card.flipped {
+  transform: rotateY(180deg);
+}
+
+.card_front,
+.card_back {
+  backface-visibility: hidden;
+  overflow: hidden;
+}
+
+.card_back {
+  transform: rotateY(180deg);
+}
