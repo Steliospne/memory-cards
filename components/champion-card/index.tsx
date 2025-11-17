@@ -18,24 +18,34 @@ const ChampionCard = ({
   console.log('render', flipped);
   return (
     <div
-      className={cn(
-        s.card_container,
-        'border-yellow-500 border-4 shadow w-[125px] aspect-11/20'
-      )}
+      className={cn(s.card_container, ' shadow w-[125px] aspect-11/20')}
       onClick={onClick}
       style={style}
     >
-      <div className={cn(s.card, flipped && s.flipped, 'relative  h-full')}>
-        <div className={cn(s.card_front)}>
+      <div
+        className={cn(
+          s.card,
+          flipped && s.flipped,
+          'relative h-full border-yellow-600 border-4'
+        )}
+      >
+        <div className={cn(s.card_front, 'absolute h-full')}>
           <Image
             alt={champion.name + ' image.'}
             src={champion.imageURL}
-            fill
-            className=''
+            width={125}
+            height={0}
+            className='h-full object-cover'
           />
         </div>
-        <div className={cn(s.card_back, ' bg-black h-full w-full')}>
-          <Image alt={'Card back.'} src={SmallLogo} fill className='' />
+        <div
+          className={cn(
+            s.card_back,
+            'absolute',
+            'bg-black h-full w-full flex items-center justify-center'
+          )}
+        >
+          <Image alt={'Card back.'} src={SmallLogo} width={125} height={0} />
         </div>
       </div>
     </div>
