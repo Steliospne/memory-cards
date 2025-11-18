@@ -4,10 +4,11 @@ import { useGlobalData } from '@/context/global-context';
 export default function Lost() {
   const { globalState } = useGlobalData();
   const { handler } = globalState;
-  const { setGameStatus } = handler;
+  const { setGameStatus, clearScore } = handler;
 
   function handleRestartButton() {
     setGameStatus('ready');
+    clearScore();
   }
 
   return (

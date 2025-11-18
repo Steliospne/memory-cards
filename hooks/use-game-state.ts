@@ -1,17 +1,14 @@
-import { Champion } from '@/types/models';
-import { useEffect, useReducer, useRef } from 'react';
+import { useEffect, useReducer } from 'react';
 import { GlobalState } from './use-global-state';
 
 type State = {
   flipped: boolean;
   positions: number[];
-  score: number;
 };
 
 const initialState: State = {
   flipped: false,
   positions: [],
-  score: 0,
 };
 
 type SetterName<K extends string> = K extends `is${infer Rest}`
@@ -30,8 +27,6 @@ function stateReducer(state: State, action: Action): State {
       return { ...state, flipped: action.payload };
     case 'setPositions':
       return { ...state, positions: action.payload };
-    case 'setScore':
-      return { ...state, score: action.payload };
   }
 }
 
@@ -42,24 +37,10 @@ interface useGameStateProps {
   globalHandler: GlobalState['handler'];
 }
 
-export default function useGameState({
-  globalState,
-  globalHandler,
-}: useGameStateProps) {
+export default function useGameState({ globalState }: useGameStateProps) {
   const [state, dispatch] = useReducer(stateReducer, initialState);
-  const scoreRef = useRef(0);
+
   const { champions } = globalState;
-  const { setGameStatus } = globalHandler;
-
-  useEffect(() => {
-    setPositions(champions.map((_, i) => i));
-  }, [champions.length]);
-
-  useEffect(() => {
-    if (scoreRef.current === champions.length) {
-      setGameStatus('won');
-    }
-  }, [state.score]);
 
   function setFlipped(payload: State['flipped']) {
     dispatch({ type: 'setFlipped', payload });
@@ -69,19 +50,15 @@ export default function useGameState({
     dispatch({ type: 'setPositions', payload });
   }
 
-  function setScore() {
-    const newScore = state.score + 1;
-    scoreRef.current = newScore;
-    dispatch({ type: 'setScore', payload: newScore });
-  }
+  useEffect(() => {
+    setPositions(champions.map((_, i) => i));
+  }, [champions]);
 
   return {
     state,
-    scoreRef,
     handler: {
       setFlipped,
       setPositions,
-      setScore,
     },
   };
 }

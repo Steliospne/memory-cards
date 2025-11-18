@@ -10,24 +10,24 @@ import Image from 'next/image';
 export default function Game() {
   const { globalState: gState } = useGlobalData();
   const { state: globalState, handler: globalHandler } = gState;
-  const { champions, difficulty } = globalState;
-  const { setGameStatus } = globalHandler;
-  const { state, handler, scoreRef } = useGameState({
+  const { champions, difficulty, bestScore, score } = globalState;
+  const { setGameStatus, incrementScore } = globalHandler;
+  const { state, handler } = useGameState({
     globalState,
     globalHandler,
   });
-  const { flipped, positions, score } = state;
-  const { setFlipped, setPositions, setScore } = handler;
+  const { flipped, positions } = state;
+  const { setFlipped, setPositions } = handler;
 
   function handleCardClick(clicked: boolean) {
-    if (clicked) setGameStatus('lost');
+    if (clicked) return setGameStatus('lost');
     setFlipped(true);
     setTimeout(() => {
       setPositions(shuffle(positions));
       setFlipped(false);
     }, 600);
 
-    setScore();
+    incrementScore();
   }
 
   function handleBackButton() {
@@ -54,9 +54,16 @@ export default function Game() {
           className='absolute'
         />
       </Button>
-      <div className='bg-hextech-black place-self-center px-12 py-6 border-4 border-gold-4 flex-col row-start-1 font-bold col-start-6 col-span-2 max-sm:text-4xl text-9xl text-gold-4 flex items-center justify-center'>
-        <span>SCORE</span>
-        {score}
+      <div className='bg-hextech-black w-full items-start place-self-center px-12 py-6 border-4 border-gold-4 flex-col row-start-1 font-bold col-start-4 col-span-6 max-sm:text-xl max-sm:px-4 max-sm:py-2 max-xl:text-4xl text-9xl text-gold-4 flex justify-center'>
+        <div className='flex gap-4'>
+          <span>BEST SCORE:</span>
+          <span>{bestScore}</span>
+        </div>
+
+        <div className='flex gap-4'>
+          <span>SCORE:</span>
+          <span>{score}</span>
+        </div>
       </div>
       <div
         className={cn(
