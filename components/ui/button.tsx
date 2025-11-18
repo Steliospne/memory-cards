@@ -34,7 +34,7 @@ const buttonVariants = cva(
       variant: 'default',
       size: 'default',
     },
-  }
+  },
 );
 
 function Button({
@@ -42,10 +42,12 @@ function Button({
   variant,
   size,
   asChild = false,
+  disableClickSound = false,
   ...props
 }: React.ComponentProps<'button'> &
   VariantProps<typeof buttonVariants> & {
     asChild?: boolean;
+    disableClickSound?: boolean;
   }) {
   const Comp = asChild ? Slot : 'button';
 
@@ -60,7 +62,7 @@ function Button({
       {...props}
       onClick={(e) => {
         props.onClick?.(e);
-        if (!clickSound.enabled) return;
+        if (!clickSound.enabled || disableClickSound) return;
         clickSound.audio?.play();
       }}
     />

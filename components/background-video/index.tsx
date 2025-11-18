@@ -11,7 +11,7 @@ const BackgroundVideo = async () => {
       loop
       autoPlay
       playsInline
-      className='h-full w-full object-cover absolute top-0 -z-9999'
+      className='absolute top-0 -z-9999 h-full w-full object-cover'
     />
   );
 };

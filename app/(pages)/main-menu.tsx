@@ -26,26 +26,27 @@ export default function MainMenu() {
   }
 
   return (
-    <div className='grid grid-rows-8 grid-cols-12 h-screen w-full'>
-      <div className='relative h-full w-full max-sm:col-start-1 max-sm:-col-end-1 max-xl:col-start-3 max-xl:col-span-8 col-start-5 col-span-4 row-start-2 row-span-3'>
+    <div className='grid h-svh w-full grid-cols-12 grid-rows-8'>
+      <div className='relative col-span-4 col-start-5 row-span-3 row-start-2 h-full w-full max-xl:col-span-8 max-xl:col-start-3 max-sm:col-start-1 max-sm:-col-end-1'>
         <Image
           alt='Main logo.'
           src={Logo}
           fill
           className='absolute object-contain'
+          loading='eager'
         />
       </div>
 
-      <div className='flex flex-col gap-4 row-start-6 row-span-2 col-start-5 col-span-4 max-sm:col-start-2 max-sm:col-span-10 max-xl:col-start-4 max-xl:col-span-6'>
+      <div className='col-span-4 col-start-5 row-span-2 row-start-6 flex flex-col gap-4 max-xl:col-span-6 max-xl:col-start-4 max-sm:col-span-10 max-sm:col-start-2'>
         <div className='flex justify-between'>
           <Button
             id='easy'
             variant='outline'
             onClick={handleSelectDifficulty}
             className={cn(
-              'max-sm:h-[40px] max-sm:w-[90px] h-[75px] w-[125px] bg-gold-6/80! text-hextech-black! border-gold-4! text-2xl max-sm:text-xl rounded-none',
+              'bg-gold-6/80! text-hextech-black! border-gold-4! h-[75px] w-[125px] rounded-none text-2xl max-sm:h-[40px] max-sm:w-[90px] max-sm:text-xl',
               difficulty === 'easy' &&
-                'bg-blue-6/80! text-gold-4! border-blue-6!'
+                'bg-blue-6/80! text-gold-4! border-blue-6!',
             )}
           >
             Easy
@@ -55,9 +56,9 @@ export default function MainMenu() {
             variant='outline'
             onClick={handleSelectDifficulty}
             className={cn(
-              'max-sm:h-[40px] max-sm:w-[90px] h-[75px] w-[125px] bg-gold-6/80! text-hextech-black! border-gold-4! text-2xl max-sm:text-xl rounded-none',
+              'bg-gold-6/80! text-hextech-black! border-gold-4! h-[75px] w-[125px] rounded-none text-2xl max-sm:h-[40px] max-sm:w-[90px] max-sm:text-xl',
               difficulty === 'medium' &&
-                'bg-blue-6/80! text-gold-4! border-blue-6!'
+                'bg-blue-6/80! text-gold-4! border-blue-6!',
             )}
           >
             Medium
@@ -67,9 +68,9 @@ export default function MainMenu() {
             variant='outline'
             onClick={handleSelectDifficulty}
             className={cn(
-              'max-sm:h-[40px] max-sm:w-[90px] h-[75px] w-[125px] bg-gold-6/80! text-hextech-black! border-gold-4! text-2xl max-sm:text-xl rounded-none',
+              'bg-gold-6/80! text-hextech-black! border-gold-4! h-[75px] w-[125px] rounded-none text-2xl max-sm:h-[40px] max-sm:w-[90px] max-sm:text-xl',
               difficulty === 'hard' &&
-                'bg-blue-6/80! text-gold-4! border-blue-6!'
+                'bg-blue-6/80! text-gold-4! border-blue-6!',
             )}
           >
             Hard
@@ -78,7 +79,7 @@ export default function MainMenu() {
         {difficulty !== '' && (
           <Button
             onClick={handleGameStart}
-            className='text-2xl max-sm:text-xl rounded-none max-sm:h-[30px] h-[60px] text-hextech-black border-blue-6! border-2'
+            className='text-hextech-black border-blue-6! h-[60px] rounded-none border-2 text-2xl max-sm:h-[30px] max-sm:text-xl'
           >
             Start
           </Button>

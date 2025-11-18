@@ -13,12 +13,12 @@ export default function Lost() {
 
   return (
     <div className='flex flex-col gap-4'>
-      <h1 className=' text-6xl bg-hextech-black border-4 border-gold-4 font-bold text-gold-4 px-8 py-4'>
+      <h1 className='bg-hextech-black border-gold-4 text-gold-4 border-4 px-8 py-4 text-6xl font-bold'>
         You Lost!
       </h1>
       <Button
         onClick={handleRestartButton}
-        className='rounded-none text-2xl h-12 text-hextech-black border-blue-6! border-4'
+        className='text-hextech-black border-blue-6! h-12 rounded-none border-4 text-2xl'
       >
         Restart
       </Button>

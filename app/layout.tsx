@@ -22,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body
-        className={`${frizQuadrata.variable} antialiased relative overflow-hidden`}
+        className={`${frizQuadrata.variable} relative overflow-hidden antialiased`}
       >
         <GlobalDataProvider>
           {children}

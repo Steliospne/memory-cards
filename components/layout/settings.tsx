@@ -19,7 +19,7 @@ type Checked = DropdownMenuCheckboxItemProps['checked'];
 export default function Settings() {
   const { globalState } = useGlobalData();
   const { state, handler } = globalState;
-  const { bgMusic } = state;
+  const { bgMusic, clickSound } = state;
   const { toggleClickSound } = handler;
   const [activateClickSound, setActivateClickSound] = useState<Checked>(true);
   const [activateBGMusic, setActivateBGMusic] = useState<Checked>(true);
@@ -45,16 +45,20 @@ export default function Settings() {
 
   return (
     <DropdownMenu open={showMenu} onOpenChange={setShowMenu}>
-      <DropdownMenuTrigger asChild>
+      <DropdownMenuTrigger
+        asChild
+        onPointerDown={() => clickSound.audio?.play()}
+      >
         <Button
           size='icon-lg'
           variant='ghost'
-          className='absolute text-gold-4 hover:text-gold-4/80 right-8 top-8 max-sm:top-4 max-sm:right-4 max-sm:scale-120 scale-200 hover:scale-180'
+          className='text-gold-4 hover:text-gold-4/80 absolute top-8 right-8 scale-200 hover:scale-180 max-sm:top-4 max-sm:right-4 max-sm:scale-120'
+          disableClickSound
         >
           <SettingsIcon />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className='rounded-none bg-hextech-black text-gold-4 border-gold-4 border-4'>
+      <DropdownMenuContent className='bg-hextech-black text-gold-4 border-gold-4 rounded-none border-4'>
         <DropdownMenuLabel>Sound</DropdownMenuLabel>
         <DropdownMenuSeparator className='bg-gold-4' />
         <DropdownMenuCheckboxItem

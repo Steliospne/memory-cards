@@ -8,7 +8,7 @@ import Lost from './(pages)/lost';
 
 export default function Home() {
   return (
-    <main className='flex items-center justify-center h-screen'>
+    <main className='flex h-svh items-center justify-center'>
       <SceneRouter />
     </main>
   );

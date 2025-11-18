@@ -50,8 +50,8 @@ const ChampionCard = memo(function MemoCard({
     <div
       className={cn(
         s.card_container,
-        'shadow w-[125px] aspect-11/20 hover:scale-105',
-        className
+        'aspect-11/20 w-[125px] shadow hover:scale-105',
+        className,
       )}
       onClick={handleCardClick}
       style={style}
@@ -60,7 +60,7 @@ const ChampionCard = memo(function MemoCard({
         className={cn(
           s.card,
           flipped && s.flipped,
-          'relative h-full border-gold-4 border-4'
+          'border-gold-4 relative h-full border-4',
         )}
       >
         <div className={cn(s.card_front, 'absolute h-full')}>
@@ -70,6 +70,7 @@ const ChampionCard = memo(function MemoCard({
             width={125}
             height={0}
             className='h-full object-cover'
+            loading='eager'
           />
         </div>
         <div className={cn(s.card_back, cardVariants({ variant }))}>
